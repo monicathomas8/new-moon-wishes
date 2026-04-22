@@ -201,3 +201,30 @@
   border-radius: 50%;
   background: linear-gradient(270deg, var(--midnight) 50%, transparent 50%);
 }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 22px 10px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.topbar-date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+}
+
+.topbar-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.topbar-icon {
+  font-size: 18px;
+}

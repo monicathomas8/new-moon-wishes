@@ -1,4 +1,5 @@
 import './App.css'
+import TopBar from './components/TopBar'
 import MoonDisplay from './components/MoonDisplay'
 import AffirmationCard from './components/AffirmationCard'
 import MoonEnergyCard from './components/MoonEnergyCard'
@@ -10,7 +11,8 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="app-title">Luna</h1>
+      <TopBar />
+      <h1 className='app-title'>Luna</h1>
       <MoonDisplay />
       <PhaseBar currentPhase={moon.name} />
       <AffirmationCard phase={moon.name} />
