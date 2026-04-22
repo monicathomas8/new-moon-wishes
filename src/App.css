@@ -116,3 +116,88 @@
   text-align: center;
   font-family: 'Inter', sans-serif;
 }
+
+.moon-countdown {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+.moon-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--gold-light), var(--gold) 50%, #8B6914);
+  box-shadow: 0 0 30px rgba(201,168,76,0.4), 0 0 60px rgba(201,168,76,0.1);
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.new-moon {
+  background: #1A2318;
+  box-shadow: 0 0 20px rgba(201,168,76,0.15), inset 0 0 15px rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+}
+
+.waxing-crescent::after {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--midnight);
+  top: 10px;
+  left: -15px;
+}
+
+.waning-crescent::after {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--midnight);
+  top: 10px;
+  right: -15px;
+}
+
+.waxing-gibbous::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--midnight);
+  top: 5px;
+  left: -10px;
+}
+
+.waning-gibbous::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--midnight);
+  top: 5px;
+  right: -10px;
+}
+
+.first-quarter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--midnight) 50%, transparent 50%);
+}
+
+.last-quarter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(270deg, var(--midnight) 50%, transparent 50%);
+}
