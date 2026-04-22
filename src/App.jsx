@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import TopBar from './components/TopBar'
 import MoonDisplay from './components/MoonDisplay'
@@ -15,6 +15,11 @@ import { getMoonPhase } from './moonPhase'
 function App() {
   const moon = getMoonPhase()
   const [currentScreen, setCurrentScreen] = useState('today')
+  const [reflectToday, setReflectToday] = useState(() => localStorage.getItem('luna-reflect-today') || '')
+
+  useEffect(() => {
+    localStorage.setItem('luna-reflect-today', reflectToday)
+  }, [reflectToday])
 
   return (
     <div className="app">
@@ -27,6 +32,17 @@ function App() {
           <PhaseBar currentPhase={moon.name} />
           <AffirmationCard phase={moon.name} />
           <MoonEnergyCard phase={moon.name} />
+          <div className="card">
+            <p className="card-label">🌿 Reflect With the Moon</p>
+            <p className="card-text" style={{fontSize: '13px', marginBottom: '8px'}}>What has been growing in your life since the new moon?</p>
+            <textarea
+              className="journal-input"
+              placeholder="Write your thoughts here…"
+              rows="3"
+              value={reflectToday}
+              onChange={(e) => setReflectToday(e.target.value)}
+            ></textarea>
+          </div>
           <CrystalCard phase={moon.name} />
         </>
       )}
