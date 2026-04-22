@@ -2,6 +2,7 @@ import './App.css'
 import MoonDisplay from './components/MoonDisplay'
 import AffirmationCard from './components/AffirmationCard'
 import MoonEnergyCard from './components/MoonEnergyCard'
+import PhaseBar from './components/PhaseBar'
 import { getMoonPhase } from './moonPhase'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     <div className="app">
       <h1 className="app-title">Luna</h1>
       <MoonDisplay />
+      <PhaseBar currentPhase={moon.name} />
       <AffirmationCard phase={moon.name} />
       <MoonEnergyCard phase={moon.name} />
     </div>
