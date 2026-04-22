@@ -44,3 +44,30 @@
   color: var(--muted);
   font-size: 12px;
 }
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 0 16px 12px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.card-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 7px;
+  font-family: 'Inter', sans-serif;
+}
+
+.card-text {
+  font-family: 'Crimson Pro', serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--cream);
+  font-style: italic;
+}
