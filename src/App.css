@@ -13,3 +13,34 @@
   letter-spacing: 4px;
   margin-top: 40px;
 }
+
+.moon-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0 20px;
+}
+
+.moon-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--gold-light), var(--gold) 50%, #8B6914);
+  box-shadow: 0 0 30px rgba(201,168,76,0.4), 0 0 60px rgba(201,168,76,0.1);
+  margin-bottom: 12px;
+}
+
+.moon-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.moon-date {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 12px;
+}
