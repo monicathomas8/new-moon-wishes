@@ -1,8 +1,8 @@
 function BottomNav({ currentScreen, onNavigate }) {
   const items = [
     { id: 'today', icon: '🌙', label: 'Today' },
-    { id: 'ritual', icon: '🔮', label: 'Ritual' },
-    { id: 'journal', icon: '📖', label: 'My Moon' },
+    { id: 'ritual', icon: '🔮', label: 'My Ritual' },
+    { id: 'journal', icon: '📖', label: 'Moon Journal' },
     { id: 'guide', icon: '🌿', label: 'Guide' },
   ]
 

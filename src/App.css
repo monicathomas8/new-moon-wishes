@@ -512,3 +512,51 @@
   resize: none;
   line-height: 1.6;
 }
+
+.screen-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 24px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-align: center;
+  margin: 20px 0 10px;
+}
+
+.phase-info-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+
+.phase-info-item:last-child {
+  border-bottom: none;
+}
+
+.phase-info-moon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.phase-info-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 11px;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.phase-info-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(242,235,217,0.65);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.phase-info-crystal {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--gold);
+  opacity: 0.7;
+}

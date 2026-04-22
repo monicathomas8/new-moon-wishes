@@ -9,6 +9,7 @@ import CrystalCard from './components/CrystalCard'
 import BottomNav from './components/BottomNav'
 import RitualScreen from './components/RitualScreen'
 import JournalScreen from './components/JournalScreen'
+import GuideScreen from './components/GuideScreen'
 import { getMoonPhase } from './moonPhase'
 
 function App() {
@@ -36,6 +37,10 @@ function App() {
 
       {currentScreen === 'journal' && (
         <JournalScreen />
+      )}
+
+      {currentScreen === 'guide' && (
+        <GuideScreen />
       )}
 
       <BottomNav currentScreen={currentScreen} onNavigate={setCurrentScreen} />

@@ -82,6 +82,7 @@ function RitualScreen({ phase }) {
 
   return (
     <div className="screen">
+      <h2 className="screen-title">My Ritual</h2>
       <div className="ritual-header">
         <MoonDisplay />
         <h2 className="ritual-title">{ritual.title}</h2>
