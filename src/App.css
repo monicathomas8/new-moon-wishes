@@ -71,3 +71,10 @@
   color: var(--cream);
   font-style: italic;
 }
+
+.card-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(242,235,217,0.75);
+}
