@@ -7,6 +7,8 @@ import MoonEnergyCard from './components/MoonEnergyCard'
 import PhaseBar from './components/PhaseBar'
 import CrystalCard from './components/CrystalCard'
 import BottomNav from './components/BottomNav'
+import RitualScreen from './components/RitualScreen'
+import JournalScreen from './components/JournalScreen'
 import { getMoonPhase } from './moonPhase'
 
 function App() {
@@ -16,12 +18,26 @@ function App() {
   return (
     <div className="app">
       <TopBar />
-      <h1 className='app-title'>Luna</h1>
-      <MoonDisplay />
-      <PhaseBar currentPhase={moon.name} />
-      <AffirmationCard phase={moon.name} />
-      <MoonEnergyCard phase={moon.name} />
-      <CrystalCard phase={moon.name} />
+
+      {currentScreen === 'today' && (
+        <>
+          <h1 className="app-title">Luna</h1>
+          <MoonDisplay />
+          <PhaseBar currentPhase={moon.name} />
+          <AffirmationCard phase={moon.name} />
+          <MoonEnergyCard phase={moon.name} />
+          <CrystalCard phase={moon.name} />
+        </>
+      )}
+
+      {currentScreen === 'ritual' && (
+        <RitualScreen phase={moon.name} />
+      )}
+
+      {currentScreen === 'journal' && (
+        <JournalScreen />
+      )}
+
       <BottomNav currentScreen={currentScreen} onNavigate={setCurrentScreen} />
     </div>
   )
