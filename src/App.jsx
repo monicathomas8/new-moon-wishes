@@ -16,6 +16,14 @@ function App() {
   const moon = getMoonPhase()
   const [currentScreen, setCurrentScreen] = useState('today')
   const [reflectToday, setReflectToday] = useState(() => localStorage.getItem('luna-reflect-today') || '')
+  const [pastCycles, setPastCycles] = useState(() => {
+  const saved = localStorage.getItem('luna-past-cycles')
+    return saved ? JSON.parse(saved) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem('luna-past-cycles', JSON.stringify(pastCycles))
+  }, [pastCycles])
 
   useEffect(() => {
     localStorage.setItem('luna-reflect-today', reflectToday)
@@ -55,6 +63,8 @@ function App() {
         <JournalScreen 
           reflectToday={reflectToday}
           setReflectToday={setReflectToday}
+          pastCycles={pastCycles}
+          setPastCycles={setPastCycles}
         />
       )}
 

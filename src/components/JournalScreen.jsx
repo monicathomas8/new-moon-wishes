@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import MoonDisplay from './MoonDisplay'
 
-function JournalScreen({ reflectToday, setReflectToday }) {
+function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycles }) {
   const [activeTab, setActiveTab] = useState('wishes')
   const [wishes, setWishes] = useState(() => {
     const saved = localStorage.getItem('luna-wishes')
@@ -11,9 +11,11 @@ function JournalScreen({ reflectToday, setReflectToday }) {
       { id: 3, text: 'Strengthen my connection with nature', checked: false },
     ]
   })
+
   const [newWish, setNewWish] = useState('')
   const [releaseText, setReleaseText] = useState(() => localStorage.getItem('luna-release') || '')
   const [reflectText, setReflectText] = useState(() => localStorage.getItem('luna-reflect') || '')
+  const [expandedCycle, setExpandedCycle] = useState(null)
 
   useEffect(() => {
     localStorage.setItem('luna-wishes', JSON.stringify(wishes))
@@ -37,6 +39,30 @@ function JournalScreen({ reflectToday, setReflectToday }) {
     setWishes(wishes.map(wish =>
       wish.id === id ? { ...wish, checked: !wish.checked } : wish
     ))
+  }
+
+  function saveCycle() {
+    const currentDate = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
+    
+    const cycle = {
+      id: Date.now(),
+      date: currentDate,
+      phase: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }),
+      wishes: wishes.filter(w => w.checked).length,
+      totalWishes: wishes.length,
+      release: releaseText,
+      reflect: reflectToday,
+    }
+
+    const existingIndex = pastCycles.findIndex(c => c.date === currentDate)
+    
+    if (existingIndex !== -1) {
+      const updated = [...pastCycles]
+      updated[existingIndex] = cycle
+      setPastCycles(updated)
+    } else {
+      setPastCycles([cycle, ...pastCycles].slice(0, 12))
+    }
   }
 
   return (
@@ -85,6 +111,7 @@ function JournalScreen({ reflectToday, setReflectToday }) {
               <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What did this moon cycle teach you?</p>
               <textarea className="journal-input" placeholder="Your reflections…" rows="4" value={reflectText} onChange={(e) => setReflectText(e.target.value)}></textarea>
             </div>
+            <button className="save-cycle-btn" onClick={saveCycle}>🌙 Save This Cycle</button>
           </>
         )}
 
@@ -102,29 +129,29 @@ function JournalScreen({ reflectToday, setReflectToday }) {
               ></textarea>
             </div>
             <div className="card">
-            <p className="card-label">📖 Past Cycles</p>
-            <div className="activity-item">
-              <span className="activity-icon">🌕</span>
-              <div className="activity-text">
-                <strong>March Full Moon</strong>
-                "Released fear of taking up space…"
-              </div>
+              <p className="card-label">📖 Past Cycles</p>
+              {pastCycles.length === 0 && (
+                <p className="card-body">No past cycles saved yet. Complete a cycle and save it!</p>
+              )}
+              {pastCycles.map(cycle => (
+                <div key={cycle.id} className="past-cycle-item" onClick={() => setExpandedCycle(expandedCycle === cycle.id ? null : cycle.id)}>
+                  <div className="past-cycle-header">
+                    <span className="activity-icon">🌕</span>
+                    <div className="activity-text">
+                      <strong>{cycle.date}</strong>
+                      {cycle.wishes} of {cycle.totalWishes} wishes checked
+                    </div>
+                    <span className="expand-icon">{expandedCycle === cycle.id ? '▲' : '▼'}</span>
+                  </div>
+                  {expandedCycle === cycle.id && (
+                    <div className="past-cycle-expanded">
+                      {cycle.release && <p><strong>Released:</strong> {cycle.release}</p>}
+                      {cycle.reflect && <p><strong>Reflected:</strong> {cycle.reflect}</p>}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-            <div className="activity-item">
-              <span className="activity-icon">🌑</span>
-              <div className="activity-text">
-                <strong>March New Moon</strong>
-                3 wishes · 1 manifested ✓
-              </div>
-            </div>
-            <div className="activity-item">
-              <span className="activity-icon">🌕</span>
-              <div className="activity-text">
-                <strong>February Full Moon</strong>
-                "Let go of a draining friendship…"
-              </div>
-            </div>
-          </div>
           </>
         )}
     </div>
