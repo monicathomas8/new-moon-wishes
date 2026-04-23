@@ -4,6 +4,7 @@
   align-items: center;
   min-height: 100vh;
   padding: 0 0 80px 0;
+  width: 100%;
 }
 
 .app-title {
@@ -50,7 +51,7 @@
   border: 1px solid rgba(201,168,76,0.2);
   border-radius: 16px;
   padding: 16px 18px;
-  margin: 0 16px 12px;
+  margin: 0 0 12px;
   width: 100%;
   max-width: 360px;
 }
@@ -85,7 +86,7 @@
   gap: 8px;
   width: 100%;
   max-width: 360px;
-  margin: 0 16px 16px;
+  margin: 0 0 16px;
   overflow-x: auto;
   scrollbar-width: none;
   padding: 8px 0;
@@ -237,7 +238,7 @@
   border: 1px solid rgba(201,168,76,0.25);
   border-radius: 16px;
   padding: 16px 18px;
-  margin: 0 16px 12px;
+  margin: 0 0 12px;
   width: 100%;
   max-width: 360px;
 }
@@ -341,7 +342,7 @@
   border: 1px solid rgba(201,168,76,0.2);
   border-radius: 16px;
   padding: 16px 18px;
-  margin: 0 16px 12px;
+  margin: 0 0 12px;
   text-align: center;
   width: 100%;
   max-width: 360px;
