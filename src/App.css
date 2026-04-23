@@ -616,3 +616,32 @@
 .past-cycle-expanded strong {
   color: var(--gold);
 }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 22px 10px;
+  width: 100%;
+  max-width: 360px;
+  align-self: center;
+}
+
+.coffee-btn {
+  font-size: 11px;
+  text-decoration: none;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.coffee-btn:hover {
+  opacity: 1;
+  border-color: var(--gold);
+  color: var(--gold);
+}
