@@ -44,6 +44,8 @@ function App() {
             <p className="card-label">🌿 Reflect With the Moon</p>
             <p className="card-text" style={{fontSize: '13px', marginBottom: '8px'}}>What has been growing in your life since the new moon?</p>
             <textarea
+              id="reflect-today-home"
+              name="reflect-today-home"
               className="journal-input"
               placeholder="Write your thoughts here…"
               rows="3"

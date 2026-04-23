@@ -87,6 +87,8 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
             ))}
             <div className="add-wish">
                 <input
+                id="new-wish"
+                name="new-wish"
                 className="wish-input"
                 type="text"
                 placeholder="Add a new wish..."
@@ -104,12 +106,12 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
             <div className="card">
               <p className="card-label">🌕 Full Moon Release</p>
               <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What are you ready to let go of this cycle?</p>
-              <textarea className="journal-input" placeholder="Write what you are releasing…" rows="4" value={releaseText} onChange={(e) => setReleaseText(e.target.value)}></textarea>
+              <textarea id="release-text" name="release-text" className="journal-input" placeholder="Write what you are releasing…" rows="4" value={releaseText} onChange={(e) => setReleaseText(e.target.value)}></textarea>
             </div>
             <div className="card">
               <p className="card-label">🌿 Looking Back This Month</p>
               <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What did this moon cycle teach you?</p>
-              <textarea className="journal-input" placeholder="Your reflections…" rows="4" value={reflectText} onChange={(e) => setReflectText(e.target.value)}></textarea>
+              <textarea id="reflect-text" name="reflect-text" className="journal-input" placeholder="Your reflections…" rows="4" value={reflectText} onChange={(e) => setReflectText(e.target.value)}></textarea>
             </div>
             <button className="save-cycle-btn" onClick={saveCycle}>🌙 Save This Cycle</button>
           </>
@@ -120,7 +122,9 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
             <div className="card">
               <p className="card-label">🌿 Today's Reflection</p>
               <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What has been growing in your life since the new moon?</p>
-              <textarea 
+              <textarea
+                id="reflect-today"
+                name="reflect-today"
                 className="journal-input" 
                 placeholder="Write your thoughts here…" 
                 rows="3"
