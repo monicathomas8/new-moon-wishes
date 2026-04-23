@@ -1,16 +1,28 @@
-# React + Vite
+# 🌙 Luna — Moon Phase & Mindfulness App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful Progressive Web App (PWA) for tracking moon phases, setting intentions and aligning with the lunar cycle.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 🌙 **Real-time moon phase tracking** — automatically calculates today's moon phase
+- 🔮 **Daily rituals** — activities and meditations matched to the current phase
+- 📖 **Moon journal** — set new moon wishes, full moon releases and reflections
+- 🌿 **Moon guide** — learn about all 8 lunar phases and their crystals
+- 💾 **Persistent storage** — your journal entries are saved to your device
+- 📱 **Installable PWA** — install on your phone or desktop like a native app
 
-## React Compiler
+## 🛠️ Built With
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- CSS
+- localStorage
+- Service Worker (PWA)
 
-## Expanding the ESLint configuration
+## 🚀 Live App
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[luna-moon-wishes.netlify.app](https://luna-moon-wishes.netlify.app)
+
+## ☕ Support
+
+If you enjoy Luna, [buy me a coffee](https://buymeacoffee.com/monicasweb)!
