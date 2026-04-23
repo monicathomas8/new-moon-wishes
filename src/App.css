@@ -208,8 +208,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 22px 10px;
-  width: 100%;
-  max-width: 360px;
+  width: 360px;
+  align-self: center;
 }
 
 .topbar-date {
@@ -226,8 +226,11 @@
   letter-spacing: 2px;
 }
 
-.topbar-icon {
-  font-size: 18px;
+.topbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .crystal-card {
@@ -617,18 +620,8 @@
   color: var(--gold);
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 22px 10px;
-  width: 100%;
-  max-width: 360px;
-  align-self: center;
-}
-
 .coffee-btn {
-  font-size: 11px;
+  font-size: 10px;
   text-decoration: none;
   color: var(--muted);
   font-family: 'Inter', sans-serif;
@@ -636,8 +629,10 @@
   opacity: 0.8;
   transition: opacity 0.2s;
   border: 1px solid rgba(201,168,76,0.3);
-  padding: 4px 10px;
+  padding: 4px 8px;
   border-radius: 20px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .coffee-btn:hover {

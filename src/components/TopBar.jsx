@@ -17,7 +17,6 @@ function TopBar() {
         >
           Buy Me A Coffee ☕
         </a>
-        <span className="topbar-icon">🌿</span>
       </div>
     </div>
   )
