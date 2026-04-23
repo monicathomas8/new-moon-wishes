@@ -52,7 +52,10 @@ function App() {
       )}
 
       {currentScreen === 'journal' && (
-        <JournalScreen />
+        <JournalScreen 
+          reflectToday={reflectToday}
+          setReflectToday={setReflectToday}
+        />
       )}
 
       {currentScreen === 'guide' && (

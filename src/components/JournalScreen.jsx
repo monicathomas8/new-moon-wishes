@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import MoonDisplay from './MoonDisplay'
 
-function JournalScreen() {
+function JournalScreen({ reflectToday, setReflectToday }) {
   const [activeTab, setActiveTab] = useState('wishes')
   const [wishes, setWishes] = useState(() => {
     const saved = localStorage.getItem('luna-wishes')
@@ -74,19 +74,58 @@ function JournalScreen() {
         )}
 
         {activeTab === 'release' && (
+          <>
             <div className="card">
-            <p className="card-label">🌕 Full Moon Release</p>
-            <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What are you ready to let go of this cycle?</p>
-            <textarea className="journal-input" placeholder="Write what you are releasing…" rows="4" value={releaseText} onChange={(e) => setReleaseText(e.target.value)}></textarea>
+              <p className="card-label">🌕 Full Moon Release</p>
+              <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What are you ready to let go of this cycle?</p>
+              <textarea className="journal-input" placeholder="Write what you are releasing…" rows="4" value={releaseText} onChange={(e) => setReleaseText(e.target.value)}></textarea>
             </div>
+            <div className="card">
+              <p className="card-label">🌿 Looking Back This Month</p>
+              <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What did this moon cycle teach you?</p>
+              <textarea className="journal-input" placeholder="Your reflections…" rows="4" value={reflectText} onChange={(e) => setReflectText(e.target.value)}></textarea>
+            </div>
+          </>
         )}
 
         {activeTab === 'reflect' && (
+          <>
             <div className="card">
-            <p className="card-label">📖 Reflect</p>
-            <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What did this moon cycle teach you?</p>
-            <textarea className="journal-input" placeholder="Your reflections…" rows="4" value={reflectText} onChange={(e) => setReflectText(e.target.value)}></textarea>
+              <p className="card-label">🌿 Today's Reflection</p>
+              <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What has been growing in your life since the new moon?</p>
+              <textarea 
+                className="journal-input" 
+                placeholder="Write your thoughts here…" 
+                rows="3"
+                value={reflectToday}
+                onChange={(e) => setReflectToday(e.target.value)}
+              ></textarea>
             </div>
+            <div className="card">
+            <p className="card-label">📖 Past Cycles</p>
+            <div className="activity-item">
+              <span className="activity-icon">🌕</span>
+              <div className="activity-text">
+                <strong>March Full Moon</strong>
+                "Released fear of taking up space…"
+              </div>
+            </div>
+            <div className="activity-item">
+              <span className="activity-icon">🌑</span>
+              <div className="activity-text">
+                <strong>March New Moon</strong>
+                3 wishes · 1 manifested ✓
+              </div>
+            </div>
+            <div className="activity-item">
+              <span className="activity-icon">🌕</span>
+              <div className="activity-text">
+                <strong>February Full Moon</strong>
+                "Let go of a draining friendship…"
+              </div>
+            </div>
+          </div>
+          </>
         )}
     </div>
   )
