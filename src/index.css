@@ -16,6 +16,10 @@
   --muted: #8A9B8E;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   background: var(--midnight);
   color: var(--cream);
