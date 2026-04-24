@@ -32,7 +32,7 @@ function App() {
   }, [reflectToday])
 
   useEffect(() => {
-    if ('Notification' in window && Notification.permission === 'default') {
+    if ('Notification' in window && Notification.permission === 'granted') {
       Notification.requestPermission()
     }
   }, [])
