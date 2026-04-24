@@ -10,11 +10,13 @@ import BottomNav from './components/BottomNav'
 import RitualScreen from './components/RitualScreen'
 import JournalScreen from './components/JournalScreen'
 import GuideScreen from './components/GuideScreen'
+import SettingsPanel from './components/SettingsPanel'
 import { getMoonPhase } from './moonPhase'
 
 function App() {
   const moon = getMoonPhase()
   const [currentScreen, setCurrentScreen] = useState('today')
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const [reflectToday, setReflectToday] = useState(() => localStorage.getItem('luna-reflect-today') || '')
   const [pastCycles, setPastCycles] = useState(() => {
   const saved = localStorage.getItem('luna-past-cycles')
@@ -29,9 +31,49 @@ function App() {
     localStorage.setItem('luna-reflect-today', reflectToday)
   }, [reflectToday])
 
+  useEffect(() => {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
+  }, [])
+
+  sendMoonNotification()
+
+  function sendMoonNotification() {
+    if (Notification.permission !== 'granted') return
+    
+    const notifOn = localStorage.getItem('luna-notif-on') === 'true'
+    if (!notifOn) return
+
+    const allPhases = localStorage.getItem('luna-notif-all') === 'true'
+    const keyMoons = localStorage.getItem('luna-notif-key') === 'true'
+    const isKeyMoon = moon.name === 'Full Moon' || moon.name === 'New Moon'
+
+    if (!allPhases && !keyMoons) return
+    if (!allPhases && keyMoons && !isKeyMoon) return
+
+    new Notification(`🌙 ${moon.name}`, {
+      body: moon.energy,
+      icon: '/moon-192.png'
+    })
+  }
+
+  useEffect(() => {
+    const lastPhase = localStorage.getItem('luna-last-phase')
+    
+    if (lastPhase !== moon.name) {
+      localStorage.setItem('luna-last-phase', moon.name)
+      
+      if (lastPhase !== null) {
+        sendMoonNotification()
+      }
+    }
+  }, [])
+
   return (
     <div className="app">
-      <TopBar />
+      <TopBar onSettingsOpen={() => setSettingsOpen(true)} />
+        {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
 
       {currentScreen === 'today' && (
         <>

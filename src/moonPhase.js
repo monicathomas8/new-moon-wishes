@@ -11,14 +11,14 @@ export function getMoonPhase() {
   const index = Math.round(phase * 8) % 8
 
   const phases = [
-    { name: 'New Moon', emoji: '🌑' },
-    { name: 'Waxing Crescent', emoji: '🌒' },
-    { name: 'First Quarter', emoji: '🌓' },
-    { name: 'Waxing Gibbous', emoji: '🌔' },
-    { name: 'Full Moon', emoji: '🌕' },
-    { name: 'Waning Gibbous', emoji: '🌖' },
-    { name: 'Last Quarter', emoji: '🌗' },
-    { name: 'Waning Crescent', emoji: '🌘' },
+    { name: 'New Moon', emoji: '🌑', energy: 'Set your intentions. A new cycle begins - plant your seeds of desire.' },
+    { name: 'Waxing Crescent', emoji: '🌒', energy: 'Take your first steps. Momentum is gathering - trust the process.' },
+    { name: 'First Quarter', emoji: '🌓', energy: 'Push through resistance. Commit to your path and stay focused.' },
+    { name: 'Waxing Gibbous', emoji: '🌔', energy: 'Refine and trust. Your intentions are growing - stay patient.' },
+    { name: 'Full Moon', emoji: '🌕', energy: 'Release what no longer serves you. The moon is fully illuminated.' },
+    { name: 'Waning Gibbous', emoji: '🌖', energy: 'Give thanks. Share your wisdom and reflect on your growth.' },
+    { name: 'Last Quarter', emoji: '🌗', energy: 'Let go and forgive. Clear space for what is coming next.' },
+    { name: 'Waning Crescent', emoji: '🌘', energy: 'Rest and restore. Surrender and prepare for the new cycle.' },
   ]
 
   return phases[index]
