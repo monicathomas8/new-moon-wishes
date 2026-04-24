@@ -1,8 +1,7 @@
-const CACHE_NAME = 'luna-v1'
+const CACHE_NAME = 'luna-v3'
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/manifest.json'
+  '/index.html'
 ]
 
 self.addEventListener('install', event => {
@@ -10,6 +9,20 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
   )
+  self.skipWaiting()
+})
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames
+          .filter(name => name !== CACHE_NAME)
+          .map(name => caches.delete(name))
+      )
+    })
+  )
+  self.clients.claim()
 })
 
 self.addEventListener('fetch', event => {
