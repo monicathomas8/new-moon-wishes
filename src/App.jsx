@@ -37,8 +37,6 @@ function App() {
     }
   }, [])
 
-  sendMoonNotification()
-
   function sendMoonNotification() {
     if (Notification.permission !== 'granted') return
     
