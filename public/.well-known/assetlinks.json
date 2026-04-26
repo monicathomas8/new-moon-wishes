@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.monicasweb.luna",
+    "sha256_cert_fingerprints": [
+      "70:AA:C4:D3:52:01:05:B3:C5:9C:E7:49:B7:C6:A6:6F:58:38:8A:A0:46:C6:04:68:14:87:20:9E:C6:C5:A8:B0"
+    ]
+  }
+}]
