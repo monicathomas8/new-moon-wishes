@@ -411,7 +411,7 @@
 
 .journal-tabs {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   padding: 12px 16px;
   overflow-x: auto;
   scrollbar-width: none;
@@ -419,14 +419,19 @@
 
 .journal-tab {
   flex-shrink: 0;
-  padding: 6px 14px;
+  padding: 6px 10px;
   border-radius: 20px;
   border: 1px solid rgba(201,168,76,0.3);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--muted);
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   background: transparent;
+}
+
+.save-tab {
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 .tab-active {
@@ -500,6 +505,38 @@
   font-size: 20px;
   width: 36px;
   cursor: pointer;
+}
+
+.wish-action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 4px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.wish-action-btn:hover {
+  opacity: 1;
+}
+
+.wish-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.wish-edit-input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--cream);
+  font-family: 'Crimson Pro', serif;
+  font-size: 14px;
 }
 
 .journal-input {

@@ -13,6 +13,8 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
   })
 
   const [newWish, setNewWish] = useState('')
+  const [editingWishId, setEditingWishId] = useState(null)
+  const [editingWishText, setEditingWishText] = useState('')
   const [releaseText, setReleaseText] = useState(() => localStorage.getItem('luna-release') || '')
   const [reflectText, setReflectText] = useState(() => localStorage.getItem('luna-reflect') || '')
   const [expandedCycle, setExpandedCycle] = useState(null)
@@ -41,6 +43,22 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
     ))
   }
 
+  function deleteWish(id) {
+    setWishes(wishes.filter(wish => wish.id !== id))
+  }
+
+  function startEditWish(wish) {
+    setEditingWishId(wish.id)
+    setEditingWishText(wish.text)
+  }
+
+  function saveEditWish(id) {
+    setWishes(wishes.map(wish =>
+      wish.id === id ? { ...wish, text: editingWishText } : wish
+    ))
+    setEditingWishId(null)
+  }
+
   function saveCycle() {
     const currentDate = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
     
@@ -50,8 +68,10 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
       phase: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }),
       wishes: wishes.filter(w => w.checked).length,
       totalWishes: wishes.length,
+      wishList: wishes,
       release: releaseText,
-      reflect: reflectToday,
+      reflect: reflectText,
+      reflectToday: reflectToday,
     }
 
     const existingIndex = pastCycles.findIndex(c => c.date === currentDate)
@@ -65,6 +85,8 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
     }
   }
 
+  const checkedCount = wishes.filter(w => w.checked).length
+
   return (
     <div className="screen">
         <h2 className="screen-title">My Moon Journal</h2>
@@ -74,15 +96,33 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
             <button className={`journal-tab ${activeTab === 'wishes' ? 'tab-active' : ''}`} onClick={() => setActiveTab('wishes')}>🌑 Wishes</button>
             <button className={`journal-tab ${activeTab === 'release' ? 'tab-active' : ''}`} onClick={() => setActiveTab('release')}>🌕 Release</button>
             <button className={`journal-tab ${activeTab === 'reflect' ? 'tab-active' : ''}`} onClick={() => setActiveTab('reflect')}>📖 Reflect</button>
+            <button className="journal-tab save-tab" onClick={saveCycle}>✨ Save</button>
         </div>
 
         {activeTab === 'wishes' && (
             <div className="card">
-            <p className="card-label">🌑 New Moon Wishes</p>
+            <p className="card-label">🌑 New Moon Wishes · {checkedCount} of {wishes.length} fulfilled</p>
             {wishes.map(wish => (
-                <div key={wish.id} className="wish-item" onClick={() => toggleWish(wish.id)}>
-                <div className={`wish-check ${wish.checked ? 'wish-checked' : ''}`}></div>
-                <p className={`wish-text ${wish.checked ? 'wish-done' : ''}`}>{wish.text}</p>
+                <div key={wish.id} className="wish-item">
+                  {editingWishId === wish.id ? (
+                    <div className="wish-edit-row">
+                      <input
+                        className="wish-edit-input"
+                        value={editingWishText}
+                        onChange={(e) => setEditingWishText(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && saveEditWish(wish.id)}
+                        autoFocus
+                      />
+                      <button className="wish-action-btn" onClick={() => saveEditWish(wish.id)}>✓</button>
+                    </div>
+                  ) : (
+                    <>
+                      <div className={`wish-check ${wish.checked ? 'wish-checked' : ''}`} onClick={() => toggleWish(wish.id)}></div>
+                      <p className={`wish-text ${wish.checked ? 'wish-done' : ''}`} onClick={() => toggleWish(wish.id)}>{wish.text}</p>
+                      <button className="wish-action-btn" onClick={() => startEditWish(wish)}>✏️</button>
+                      <button className="wish-action-btn" onClick={() => deleteWish(wish.id)}>🗑️</button>
+                    </>
+                  )}
                 </div>
             ))}
             <div className="add-wish">
@@ -102,19 +142,11 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
         )}
 
         {activeTab === 'release' && (
-          <>
-            <div className="card">
-              <p className="card-label">🌕 Full Moon Release</p>
-              <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What are you ready to let go of this cycle?</p>
-              <textarea id="release-text" name="release-text" className="journal-input" placeholder="Write what you are releasing…" rows="4" value={releaseText} onChange={(e) => setReleaseText(e.target.value)}></textarea>
-            </div>
-            <div className="card">
-              <p className="card-label">🌿 Looking Back This Month</p>
-              <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What did this moon cycle teach you?</p>
-              <textarea id="reflect-text" name="reflect-text" className="journal-input" placeholder="Your reflections…" rows="4" value={reflectText} onChange={(e) => setReflectText(e.target.value)}></textarea>
-            </div>
-            <button className="save-cycle-btn" onClick={saveCycle}>🌙 Save This Cycle</button>
-          </>
+          <div className="card">
+            <p className="card-label">🌕 Full Moon Release</p>
+            <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What are you ready to let go of this cycle?</p>
+            <textarea id="release-text" name="release-text" className="journal-input" placeholder="Write what you are releasing…" rows="4" value={releaseText} onChange={(e) => setReleaseText(e.target.value)}></textarea>
+          </div>
         )}
 
         {activeTab === 'reflect' && (
@@ -133,6 +165,11 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
               ></textarea>
             </div>
             <div className="card">
+              <p className="card-label">🌿 Looking Back This Month</p>
+              <p className="card-text" style={{fontSize: '13px', marginBottom: '10px'}}>What did this moon cycle teach you?</p>
+              <textarea id="reflect-text" name="reflect-text" className="journal-input" placeholder="Your reflections…" rows="4" value={reflectText} onChange={(e) => setReflectText(e.target.value)}></textarea>
+            </div>
+            <div className="card">
               <p className="card-label">📖 Past Cycles</p>
               {pastCycles.length === 0 && (
                 <p className="card-body">No past cycles saved yet. Complete a cycle and save it!</p>
@@ -143,14 +180,44 @@ function JournalScreen({ reflectToday, setReflectToday, pastCycles, setPastCycle
                     <span className="activity-icon">🌕</span>
                     <div className="activity-text">
                       <strong>{cycle.date}</strong>
-                      {cycle.wishes} of {cycle.totalWishes} wishes checked
+                      {cycle.wishes} of {cycle.totalWishes} wishes fulfilled
                     </div>
                     <span className="expand-icon">{expandedCycle === cycle.id ? '▲' : '▼'}</span>
                   </div>
                   {expandedCycle === cycle.id && (
                     <div className="past-cycle-expanded">
-                      {cycle.release && <p><strong>Released:</strong> {cycle.release}</p>}
-                      {cycle.reflect && <p><strong>Reflected:</strong> {cycle.reflect}</p>}
+                      {cycle.wishList && cycle.wishList.length > 0 && (
+                        <div className="past-cycle-section">
+                          <p><strong>Wishes:</strong></p>
+                          {cycle.wishList.map(w => (
+                            <p key={w.id} className="past-cycle-wish">{w.checked ? '✓' : '○'} {w.text}</p>
+                          ))}
+                        </div>
+                      )}
+                      {cycle.release && (
+                        <div className="past-cycle-section">
+                          <p><strong>Released:</strong></p>
+                          {cycle.release.split('\n').filter(l => l.trim()).map((line, i) => (
+                            <p key={i} className="past-cycle-wish">• {line}</p>
+                          ))}
+                        </div>
+                      )}
+                      {cycle.reflect && (
+                        <div className="past-cycle-section">
+                          <p><strong>Looking Back:</strong></p>
+                          {cycle.reflect.split('\n').filter(l => l.trim()).map((line, i) => (
+                            <p key={i} className="past-cycle-wish">• {line}</p>
+                          ))}
+                        </div>
+                      )}
+                      {cycle.reflectToday && (
+                        <div className="past-cycle-section">
+                          <p><strong>Today's Reflection:</strong></p>
+                          {cycle.reflectToday.split('\n').filter(l => l.trim()).map((line, i) => (
+                            <p key={i} className="past-cycle-wish">• {line}</p>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
