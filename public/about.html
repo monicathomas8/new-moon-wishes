@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luna — Moon Phase & Mindfulness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --midnight: #0D1B2A;
+      --earth-dark: #1A2318;
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --cream: #F2EBD9;
+      --muted: #8A9B8E;
+    }
+
+    body {
+      background: var(--midnight);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      background: radial-gradient(ellipse at top, #1a2d1a 0%, var(--midnight) 70%);
+      position: relative;
+    }
+
+    .hero-moon {
+      font-size: 80px;
+      margin-bottom: 24px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(40px, 10vw, 80px);
+      color: var(--gold);
+      letter-spacing: 6px;
+      margin-bottom: 16px;
+    }
+
+    .hero-tagline {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: clamp(18px, 4vw, 28px);
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--midnight);
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      border: 1px solid rgba(201,168,76,0.4);
+    }
+
+    /* Section */
+    .section {
+      padding: 80px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(20px, 5vw, 36px);
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+
+    .section-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 18px;
+      line-height: 1.8;
+      color: rgba(242,235,217,0.8);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Screenshots */
+    .screenshots {
+      padding: 60px 24px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .screenshots-grid {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px 0;
+      scrollbar-width: none;
+      max-width: 1000px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .screenshot {
+      flex-shrink: 0;
+      width: 200px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .screenshot img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 40px auto 0;
+      text-align: left;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .feature-icon { font-size: 28px; margin-bottom: 12px; }
+
+    .feature-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 12px;
+      color: var(--gold);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .feature-text {
+      font-size: 13px;
+      color: rgba(242,235,217,0.65);
+      line-height: 1.6;
+    }
+
+    /* Download */
+    .download {
+      padding: 80px 24px;
+      text-align: center;
+      background: radial-gradient(ellipse at center, #1a2d1a 0%, var(--midnight) 70%);
+    }
+
+    /* Footer */
+    footer {
+      padding: 30px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      margin: 0 12px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-moon">🌙</div>
+    <h1 class="hero-title">Luna</h1>
+    <p class="hero-tagline">Wish. Release. Repeat.</p>
+    <p class="hero-sub">New moon wishes. Full moon release.</p>
+    <div class="hero-buttons">
+      <a href="https://play.google.com/store/apps/details?id=com.monicasweb.luna" class="btn-primary">📱 Get on Google Play</a>
+      <a href="https://www.lunawishes.co.uk" class="btn-secondary">🌐 Open Web App</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- What is Luna -->
+  <div class="section">
+    <p class="section-label">🌙 About Luna</p>
+    <h2 class="section-title">Align with the lunar cycle</h2>
+    <p class="section-text">Luna helps you set intentions with the new moon and release what no longer serves you with the full moon. Everything else — the rituals, the journal, the moon guide — is just beautiful sprinkles on top.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Screenshots -->
+  <div class="screenshots">
+    <div class="section" style="padding-bottom: 0;">
+      <p class="section-label">✨ The App</p>
+      <h2 class="section-title">Beautiful by moonlight</h2>
+    </div>
+    <div class="screenshots-grid">
+      <div class="screenshot"><img src="/images/luna4.jpeg" alt="Luna today screen" /></div>
+      <div class="screenshot"><img src="/images/luna2.jpeg" alt="Luna moon journal" /></div>
+      <div class="screenshot"><img src="/images/luna3.jpeg" alt="Luna ritual screen" /></div>
+      <div class="screenshot"><img src="/images/luna1.jpeg" alt="Luna moon guide" /></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Features -->
+  <div class="section">
+    <p class="section-label">🌿 Features</p>
+    <h2 class="section-title">Everything you need</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🌑</div>
+        <div class="feature-title">New Moon Wishes</div>
+        <div class="feature-text">Set your intentions and wishes with each new moon. Track them through the cycle.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌕</div>
+        <div class="feature-title">Full Moon Release</div>
+        <div class="feature-text">Let go of what no longer serves you. Reflect on your growth each cycle.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔮</div>
+        <div class="feature-title">Daily Rituals</div>
+        <div class="feature-text">Receive rituals and activities matched to the current moon phase.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">Moon Guide</div>
+        <div class="feature-text">Learn about all 8 lunar phases, their energy and their crystals.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔔</div>
+        <div class="feature-title">Moon Notifications</div>
+        <div class="feature-text">Get notified when the moon changes phase so you never miss a moment.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💛</div>
+        <div class="feature-title">Free Forever</div>
+        <div class="feature-text">Luna is completely free. No account needed. Your journal stays on your device.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Download -->
+  <div class="download">
+    <p class="section-label">🌙 Get Luna</p>
+    <h2 class="section-title" style="margin-bottom: 16px;">Start your lunar journey</h2>
+    <p class="section-text" style="margin-bottom: 40px;">Set your intentions with the new moon. Release with the full moon. Free on Android and any browser.</p>
+    <div class="hero-buttons">
+      <a href="https://play.google.com/store/apps/details?id=com.monicasweb.luna" class="btn-primary">📱 Get on Google Play</a>
+      <a href="https://www.lunawishes.co.uk" class="btn-secondary">🌐 Open Web App</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="https://buymeacoffee.com/monicasweb">☕ Buy Me a Coffee</a>
+    <a href="https://www.lunawishes.co.uk">Open App</a>
+    <p style="color: var(--muted); font-size: 11px; margin-top: 16px;">Crafted by Monica · Monicas Web 🌙</p>
+    <p style="color: var(--muted); font-size: 11px; margin-top: 8px;">© 2026 Monicas Web. All rights reserved.</p>
+    <a href="https://www.instagram.com/monica.webdeveloper/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+    </a>
+  </footer>
+
+</body>
+</html>
