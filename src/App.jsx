@@ -11,6 +11,7 @@ import RitualScreen from './components/RitualScreen'
 import JournalScreen from './components/JournalScreen'
 import GuideScreen from './components/GuideScreen'
 import SettingsPanel from './components/SettingsPanel'
+import MeditationCatalogue from './components/MeditationCatalogue'
 import { getMoonPhase } from './moonPhase'
 
 function App() {

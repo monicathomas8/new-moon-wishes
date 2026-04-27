@@ -776,3 +776,210 @@
   opacity: 0.4;
   pointer-events: none;
 }
+
+
+.progress-bar {
+  height: 3px;
+  background: rgba(201,168,76,0.2);
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 12px 0 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #C9A84C, #E8C97A);
+  border-radius: 2px;
+  transition: width 0.5s linear;
+}
+
+.progress-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: rgba(138,155,142,0.7);
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Meditation Catalogue */
+.catalogue-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 0;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  color: var(--gold);
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  flex-shrink: 0;
+}
+
+.catalogue-subtitle {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 4px 16px 16px;
+}
+
+.now-playing-bar {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.now-playing-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.now-playing-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+}
+
+.now-playing-time {
+  font-size: 10px;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+}
+
+.now-playing-title {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.catalogue-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 0 0 10px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.catalogue-item-active {
+  background: rgba(201,168,76,0.08);
+  border-color: rgba(201,168,76,0.4);
+}
+
+.catalogue-emoji {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.catalogue-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.catalogue-phase-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.catalogue-phase-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 10px;
+  color: var(--cream);
+  letter-spacing: 1px;
+}
+
+.catalogue-item-active .catalogue-phase-name {
+  color: var(--gold);
+}
+
+.catalogue-today-badge {
+  font-size: 9px;
+  color: var(--gold);
+  background: rgba(201,168,76,0.15);
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+}
+
+.catalogue-title {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(242,235,217,0.85);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.catalogue-meta {
+  font-size: 10px;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.catalogue-play-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.1);
+  border: 1.5px solid rgba(201,168,76,0.4);
+  color: var(--gold);
+  font-size: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catalogue-play-active {
+  background: rgba(201,168,76,0.25);
+  border-color: var(--gold);
+}
+
+.more-meditations-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 12px;
+  color: rgba(201,168,76,0.8);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  max-width: 360px;
+}

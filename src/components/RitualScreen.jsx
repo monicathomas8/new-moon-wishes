@@ -1,8 +1,117 @@
+import { useState, useRef, useEffect } from 'react'
 import MoonEnergyCard from "./MoonEnergyCard"
+import MeditationCatalogue from './MeditationCatalogue'
 import CrystalCard from './CrystalCard'
 import MoonDisplay from './MoonDisplay'
 
+
+const meditationAudio = {
+  'New Moon': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777319000/luna-new-moon.mp3_yv1t5f.mp3',
+  'Waxing Crescent': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777318524/luna-waxing-crescent.mp3_tbpbdi.mp3',
+  'First Quarter': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777318580/luna-first-quarter.mp3_qpcemc.mp3',
+  'Waxing Gibbous': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777318566/luna-waxing-gibbous.mp3_mwivju.mp3',
+  'Full Moon': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777318588/luna-full-moon-v2.mp3_og49rk.mp3',
+  'Waning Gibbous': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777318557/luna-waning-gibbous.mp3_zh3qdu.mp3',
+  'Last Quarter': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777318548/luna-last-quarter.mp3_icaijk.mp3',
+  'Waning Crescent': 'https://res.cloudinary.com/debnitfjn/video/upload/v1777318573/luna-waning-crescent-v2.mp3_w35n8q.mp3',
+}
+
+const meditationDurations = {
+  'New Moon': '9 min',
+  'Waxing Crescent': '7 min',
+  'First Quarter': '10 min',
+  'Waxing Gibbous': '10 min',
+  'Full Moon': '10 min',
+  'Waning Gibbous': '9 min',
+  'Last Quarter': '9 min',
+  'Waning Crescent': '9 min',
+}
+
+function MeditationPlayer({ phase }) {
+  const audioRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    setIsPlaying(false)
+    setProgress(0)
+    setCurrentTime(0)
+    setDuration(0)
+  }, [phase])
+
+  const togglePlay = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (isPlaying) {
+      audio.pause()
+      setIsPlaying(false)
+    } else {
+      setIsLoading(true)
+      audio.play()
+        .then(() => { setIsPlaying(true); setIsLoading(false) })
+        .catch(() => setIsLoading(false))
+    }
+  }
+
+  const handleTimeUpdate = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    setCurrentTime(audio.currentTime)
+    setProgress((audio.currentTime / audio.duration) * 100 || 0)
+  }
+
+  const handleEnded = () => {
+    setIsPlaying(false)
+    setProgress(0)
+    setCurrentTime(0)
+  }
+
+  const handleSeek = (e) => {
+    const audio = audioRef.current
+    if (!audio) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration
+  }
+
+  const formatTime = (secs) => {
+    if (!secs || isNaN(secs)) return '0:00'
+    const m = Math.floor(secs / 60)
+    const s = Math.floor(secs % 60)
+    return `${m}:${s.toString().padStart(2, '0')}`
+  }
+
+  return (
+    <div className="meditation-card">
+      <audio
+        ref={audioRef}
+        src={meditationAudio[phase]}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
+        onEnded={handleEnded}
+        preload="metadata"
+      />
+      <p className="card-label">🧘 Guided Meditation</p>
+      <p className="meditation-title">{phase} Meditation</p>
+      <div className="play-button" onClick={togglePlay}>
+        {isLoading ? '⏳' : isPlaying ? '⏸' : '▶'}
+      </div>
+      <p className="meditation-duration">{meditationDurations[phase]} · Breath & Visualisation</p>
+      <div className="progress-bar" onClick={handleSeek}>
+        <div className="progress-fill" style={{ width: `${progress}%` }} />
+      </div>
+      <div className="progress-times">
+        <span>{formatTime(currentTime)}</span>
+        <span>{formatTime(duration)}</span>
+      </div>
+    </div>
+  )
+}
+
 function RitualScreen({ phase }) {
+  const [showCatalogue, setShowCatalogue] = useState(false)
   const rituals = {
     'New Moon': {
       title: 'New Moon Ritual',
@@ -79,6 +188,9 @@ function RitualScreen({ phase }) {
   }
 
   const ritual = rituals[phase]
+  if (showCatalogue) {
+    return <MeditationCatalogue phase={phase} onBack={() => setShowCatalogue(false)} />
+  }
 
   return (
     <div className="screen">
@@ -89,12 +201,11 @@ function RitualScreen({ phase }) {
         <p className="ritual-subtitle">{ritual.subtitle}</p>
       </div>
 
-      <div className="meditation-card">
-        <p className="card-label">🧘 Guided Meditation</p>
-        <p className="meditation-title">Coming Soon</p>
-        <div className="play-button">▶</div>
-        <p className="meditation-duration">Meditation coming soon</p>
-      </div>
+      <MeditationPlayer phase={phase} />
+
+      <button className="more-meditations-btn" onClick={() => setShowCatalogue(true)}>
+        🎧 More Meditations
+      </button>
 
       <div className="card">
         <p className="card-label">🌙 Ritual Activities</p>
